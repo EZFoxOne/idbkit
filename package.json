@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "description": "A robust, drop-in IndexedDB wrapper for web apps",
   "keywords": ["indexeddb", "idb", "browser", "storage", "database", "offline"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EZFoxOne/idbkit.git"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

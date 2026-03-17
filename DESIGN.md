@@ -1,6 +1,6 @@
 # DatabaseManager v2 — Design Document
 
-A design specification for evolving the IndexedDB-Manager into a robust, drop-in library that exposes the full power of IndexedDB while remaining approachable for simple use cases.
+A design specification for idbkit — a robust, drop-in library that exposes the full power of IndexedDB while remaining approachable for simple use cases.
 
 ---
 
