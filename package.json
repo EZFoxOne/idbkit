@@ -1,5 +1,5 @@
 {
-  "name": "idbkit",
+  "name": "@projectcarey/idbkit",
   "version": "2.0.0",
   "description": "A robust, drop-in IndexedDB wrapper for web apps",
   "keywords": ["indexeddb", "idb", "browser", "storage", "database", "offline"],
