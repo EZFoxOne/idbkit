@@ -1,0 +1,39 @@
+{
+  "name": "idbkit",
+  "version": "2.0.0",
+  "description": "A robust, drop-in IndexedDB wrapper for web apps",
+  "keywords": ["indexeddb", "idb", "browser", "storage", "database", "offline"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EZFoxOne/idbkit.git"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && node scripts/copy-dts.js",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "example": "npm run build && npx serve . -p 3000"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.6",
+    "fake-indexeddb": "^6.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
+  }
+}
