@@ -141,12 +141,38 @@
     .status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
     .status.ready .dot { animation: pulse 2s infinite; }
     @keyframes pulse { 50% { opacity: 0.5; } }
+
+    .instructions {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .instructions summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .instructions summary:hover { opacity: 0.9; }
+    .instructions code {
+      display: block;
+      background: var(--bg);
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+      font-size: 0.75rem;
+      overflow-x: auto;
+    }
+    .instructions ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+    .instructions li { margin-bottom: 0.25rem; }
   </style>
 </head>
 <body>
   <div class="layout">
     <header>
-      <h1>DatabaseManager</h1>
+      <h1>idbkit</h1>
       <p class="subtitle">IndexedDB wrapper — feature demo</p>
       <div id="status" class="status pending"><span class="dot"></span> Initializing…</div>
     </header>
@@ -156,6 +182,18 @@
       <section class="card">
         <h2>1. Simple KV API</h2>
         <p>get, set, delete, list, getAll, clear, setAll</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>await db.set('key', value);<br>const v = await db.get('key');</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>User preferences & settings</li>
+            <li>Simple cache (API responses, computed data)</li>
+            <li>Draft/autosave state</li>
+            <li>Feature flags or config</li>
+          </ul>
+        </details>
         <div class="row">
           <input id="kv-key" placeholder="Key" value="greeting">
           <input id="kv-value" placeholder="Value" value="Hello, IndexedDB!">
@@ -178,6 +216,17 @@
       <section class="card">
         <h2>2. Store API</h2>
         <p>Multi-store, put, count, getKeys</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>const store = db.store('users');<br>await store.set('id', { name, email });<br>const n = await store.count();</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>Separate data by domain (users, products, sessions)</li>
+            <li>Store full objects with structured fields</li>
+            <li>Count records without loading them</li>
+          </ul>
+        </details>
         <div class="row">
           <select id="store-name">
             <option value="users">users</option>
@@ -199,6 +248,17 @@
       <section class="card">
         <h2>3. Index Queries</h2>
         <p>Query by index (email, createdAt)</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>await db.store('users').index('email').get('user@test.com');<br>await store.index('createdAt').getAll({ from: start, to: end });</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>Look up by non-primary key (email, slug, userId)</li>
+            <li>Range queries (date ranges, numeric bounds)</li>
+            <li>Unique constraints (one account per email)</li>
+          </ul>
+        </details>
         <div class="row">
           <input id="index-email" placeholder="Email" value="alice@test.com">
           <button onclick="indexGetByEmail()">Get by Email</button>
@@ -213,10 +273,20 @@
       <section class="card">
         <h2>4. Transactions</h2>
         <p>Batch write to users + cache</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>await db.transaction(['users','sessions'], 'readwrite', async (tx) => {<br>  await tx.store('users').set(...);<br>  await tx.store('sessions').set(...);<br>});</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>Atomic multi-store updates (all succeed or all fail)</li>
+            <li>User signup: create user + default settings + session</li>
+            <li>Order: deduct inventory + create order record</li>
+          </ul>
+        </details>
         <div class="row">
           <button onclick="runTransaction()">Run Transaction</button>
         </div>
-        <p style="font-size:0.8rem;margin-top:0.5rem">Creates user + session in one atomic operation</p>
         <div id="tx-output" class="output"></div>
       </section>
 
@@ -224,6 +294,17 @@
       <section class="card">
         <h2>5. Cursor Iteration</h2>
         <p>Async iterate over store</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>for await (const [key, value] of store.iterate()) {<br>  process(key, value);<br>}</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>Process large datasets without loading all into memory</li>
+            <li>Export data, batch sync, or migrations</li>
+            <li>Reverse iteration (newest first) with direction: 'prev'</li>
+          </ul>
+        </details>
         <div class="row">
           <button onclick="iterateStore()">Iterate Users</button>
         </div>
@@ -234,6 +315,17 @@
       <section class="card">
         <h2>6. Utilities</h2>
         <p>Storage estimate, persistence</p>
+        <details class="instructions">
+          <summary>How to use & use cases</summary>
+          <strong>Code:</strong>
+          <code>const { usage, quota } = await db.getStorageEstimate();<br>const ok = await db.requestPersistence();</code>
+          <strong>Use cases:</strong>
+          <ul>
+            <li>Show users how much storage is used</li>
+            <li>Warn before quota is full</li>
+            <li>Request persistent storage (avoid eviction when disk is low)</li>
+          </ul>
+        </details>
         <div class="row">
           <button onclick="getStorage()">Storage Estimate</button>
           <button onclick="requestPersist()">Request Persistence</button>

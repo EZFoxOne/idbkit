@@ -245,11 +245,8 @@ export class DatabaseManager {
 // Re-export for consumers
 export { DatabaseManagerError, ErrorCodes } from './utils/errors.js';
 
-// Backward compatible: browser global and CJS export
+// Backward compatible: browser global (for script tag usage)
 if (typeof window !== 'undefined') {
   window.DatabaseManager = DatabaseManager;
   window.databaseManager = new DatabaseManager();
-}
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { DatabaseManager, DatabaseManagerError, ErrorCodes };
 }
