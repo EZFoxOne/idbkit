@@ -1,6 +1,6 @@
 # idbkit — Feature Demo
 
-Interactive demo of all library features.
+Interactive demo of all library features. Install from [npm](https://www.npmjs.com/package/@projectcarey/idbkit).
 
 ## Run
 

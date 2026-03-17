@@ -2,12 +2,23 @@
   "name": "@projectcarey/idbkit",
   "version": "2.0.0",
   "description": "A robust, drop-in IndexedDB wrapper for web apps",
-  "keywords": ["indexeddb", "idb", "browser", "storage", "database", "offline"],
+  "keywords": [
+    "indexeddb",
+    "idb",
+    "browser",
+    "storage",
+    "database",
+    "offline"
+  ],
   "author": "Cole Carey",
   "license": "MIT",
+  "homepage": "https://github.com/EZFoxOne/idbkit#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/EZFoxOne/idbkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EZFoxOne/idbkit/issues"
   },
   "type": "module",
   "main": "./dist/index.cjs",
@@ -37,5 +48,8 @@
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "vitest": "^2.1.6"
+  },
+  "dependencies": {
+    "@projectcarey/idbkit": "^2.0.0"
   }
 }

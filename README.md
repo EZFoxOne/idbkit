@@ -1,5 +1,7 @@
 # idbkit
 
+[![npm version](https://img.shields.io/npm/v/@projectcarey/idbkit.svg)](https://www.npmjs.com/package/@projectcarey/idbkit)
+
 A robust, drop-in IndexedDB wrapper for web apps. Use it for simple key-value storage or full offline-first data layers with indexes, migrations, and transactions.
 
 ## Features
@@ -16,6 +18,8 @@ A robust, drop-in IndexedDB wrapper for web apps. Use it for simple key-value st
 ```bash
 npm install @projectcarey/idbkit
 ```
+
+📦 [View on npm](https://www.npmjs.com/package/@projectcarey/idbkit)
 
 ## Quick Start
 
