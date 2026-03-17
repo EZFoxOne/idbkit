@@ -14,7 +14,7 @@ A robust, drop-in IndexedDB wrapper for web apps. Use it for simple key-value st
 ## Installation
 
 ```bash
-npm install idbkit
+npm install @projectcarey/idbkit
 ```
 
 ## Quick Start
@@ -22,7 +22,7 @@ npm install idbkit
 ### Simple mode (backward compatible)
 
 ```javascript
-import { DatabaseManager } from 'idbkit';
+import { DatabaseManager } from '@projectcarey/idbkit';
 
 const db = new DatabaseManager('myDatabase', 1, 'myStore', 'id');
 await db.init();
@@ -150,7 +150,7 @@ Errors are `DatabaseManagerError` with a `code` property:
 - `UNKNOWN` — Other errors
 
 ```javascript
-import { DatabaseManager, DatabaseManagerError, ErrorCodes } from 'idbkit';
+import { DatabaseManager, DatabaseManagerError, ErrorCodes } from '@projectcarey/idbkit';
 
 try {
   await db.set('key', value);
